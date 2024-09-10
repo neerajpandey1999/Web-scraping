@@ -55,6 +55,13 @@ This repository includes code for scraping data from websites using Beautiful So
 
 
 ## Summary of Commands
+Create python virtual environment and install dependencies
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
 
 To run Beautiful Soup scripts:
 ```bash
