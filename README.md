@@ -24,10 +24,6 @@ This repository includes code for scraping data from websites using Beautiful So
    - Export the scraped data to a JSON file.
    - Convert the JSON data into a Word document using a separate script.
 
-3. **Using Selenium** (if needed):
-   - Set up Selenium with ChromeDriver.
-   - Write a Selenium script to scrape the TFT website if it has dynamic content not handled by Beautiful Soup or Scrapy.
-
 ## Assignment 2: Scrape Flipkart/Amazon Website for Monitors and Create a CSV
 
 ### Objective
@@ -56,3 +52,31 @@ This repository includes code for scraping data from websites using Beautiful So
    - Set up Selenium with ChromeDriver.
    - Write a Selenium script to scrape the Flipkart/Amazon website, especially if it includes dynamic content or requires user interactions.
    - Save the data into a CSV file.
+
+
+## Summary of Commands
+
+To run Beautiful Soup scripts:
+```bash
+#Assignment 1
+cd beautifulsoup4/assignment_1
+python generate_doc.py
+#Assignment 2
+cd beautifulsoup4/assignment_2
+python generate_data.py
+```
+
+To run Scrapy:
+```bash
+cd scrapy/web_scraping_assignements/tft_scraper/tft_scraper
+#Assignment 1
+scrapy crawl assignment1
+#Assignment 2
+scrapy crawl assignment2
+```
+
+To run Selenium scripts for Assignment 2:
+```bash
+cd selenium
+python assignment_2.py
+```

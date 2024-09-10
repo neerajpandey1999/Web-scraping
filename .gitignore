@@ -1,0 +1,27 @@
+# Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+
+# Selenium specific
+selenium/
+*.log
+
+# Word documents and CSV files
+*.docx
+*.csv
+
+
+# IDE specific files
+.vscode/
+.idea/
+
+

@@ -6,7 +6,7 @@ from ..items import MonitorItem
 
 
 class MonitorSpider(scrapy.Spider):
-    name = "monitors"
+    name = "assignment2"
 
     def __init__(self, *args, **kwargs):
         super(MonitorSpider, self).__init__(*args, **kwargs)

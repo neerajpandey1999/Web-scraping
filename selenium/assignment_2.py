@@ -5,17 +5,14 @@ import csv
 import configparser
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
 import re
 from locators import CLOSE_LOGIN_POPUP_XPATH, SEARCH_INPUT_NAME, PRODUCT_CONTAINER_XPATH, PRODUCT_NAME_XPATH, \
     PRODUCT_PRICE_XPATH, PRODUCT_REVIEW_XPATH, NEXT_PAGE_BUTTON_XPATH
 
-# Read configurations from config.ini
 config = configparser.ConfigParser()
 config.read('config.ini')
 
@@ -69,23 +66,21 @@ class FlipkartMonitorScraper:
         self.driver.get(self.base_url)
         time.sleep(3)
 
-        # Close login popup if it appears
         try:
             close_button = self.driver.find_element(By.XPATH, CLOSE_LOGIN_POPUP_XPATH)
             close_button.click()
         except:
-            pass  # No popup
+            pass
 
-        # Enter search term
         search_input = self.driver.find_element(By.NAME, SEARCH_INPUT_NAME)
         search_input.send_keys("monitors")
-        search_input.send_keys(u'\ue007')  # Press Enter
+        search_input.send_keys(u'\ue007')
         time.sleep(3)
 
     def scrape_all_pages(self):
         all_product_data = []
 
-        for page in range(1, 21):  # Loop through 20 pages
+        for page in range(1, 21):
             print(f"Scraping page {page}")
             page_data = self.scrape_products()
             all_product_data.extend(page_data)
@@ -94,7 +89,7 @@ class FlipkartMonitorScraper:
             try:
                 next_button = self.driver.find_element(By.XPATH, NEXT_PAGE_BUTTON_XPATH)
                 next_button.click()
-                time.sleep(3)  # Wait for the next page to load
+                time.sleep(3)
             except:
                 print("No more pages or unable to find the next button")
                 break
@@ -110,14 +105,12 @@ class FlipkartMonitorScraper:
                 price = product.find_element(By.XPATH, PRODUCT_PRICE_XPATH).text
                 review_stars = product.find_element(By.XPATH, PRODUCT_REVIEW_XPATH).text
 
-                # Extract resolution and manufacturer using regex
                 resolution_match = self.resolution_pattern.search(name)
                 manufacturer_match = self.manufacturer_pattern.search(name)
 
                 manufacturer = manufacturer_match.group(1).strip() if manufacturer_match else 'N/A'
                 resolution = resolution_match.group(1).strip() if resolution_match else 'N/A'
 
-                # Append the data
                 product_data.append({
                     'Model': name,
                     'Price': price,
@@ -148,7 +141,6 @@ class FlipkartMonitorScraper:
         finally:
             self.driver.quit()
 
-# Run the scraper
 if __name__ == "__main__":
     scraper = FlipkartMonitorScraper()
     scraper.run()
